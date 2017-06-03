@@ -55,7 +55,6 @@ public class MapsActivity extends AppCompatActivity
     public static final String INTENT_AKTIVIRAJ_NOTIFIKACIJE = "AKTIVIRAJ_NOTIFIKACIJE";
     public static final String BROADCAST_TEST = "com.elfak.twoangrymen.shopnet.BROADCAST_TEST";
 
-
     private GoogleMap mMap;
     private Location mLastLocation;
     private ArrayList<Marker> mMarkersPopusti = new ArrayList<>();

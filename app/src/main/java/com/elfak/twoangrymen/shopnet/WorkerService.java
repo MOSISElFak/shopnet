@@ -55,7 +55,7 @@ public class WorkerService extends Service implements GoogleApiClient.Connection
         super.onStartCommand(aIntent, flags, startId);
 
         if(aIntent != null) {
-            Toast.makeText(this, "Ne saljem notifikacije.", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Ne saljem notifikacije.", Toast.LENGTH_SHORT).show();
             sendNotifications = false;
             if (aIntent.getAction() == MapsActivity.INTENT_OSVEZI_POPUSTE) {
                 osveziPopuste();
@@ -69,7 +69,7 @@ public class WorkerService extends Service implements GoogleApiClient.Connection
         if(aIntent == null
                 || (flags & START_FLAG_REDELIVERY) != 0
                 || aIntent.getAction() == MapsActivity.INTENT_AKTIVIRAJ_NOTIFIKACIJE){
-            Toast.makeText(this, "Saljem notifikacije.", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Saljem notifikacije.", Toast.LENGTH_SHORT).show();
             sendNotifications = true;
         }
 
