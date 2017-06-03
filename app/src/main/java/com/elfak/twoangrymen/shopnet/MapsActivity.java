@@ -55,6 +55,7 @@ public class MapsActivity extends AppCompatActivity
     public static final String INTENT_AKTIVIRAJ_NOTIFIKACIJE = "AKTIVIRAJ_NOTIFIKACIJE";
     public static final String BROADCAST_TEST = "com.elfak.twoangrymen.shopnet.BROADCAST_TEST";
 
+
     private GoogleMap mMap;
     private Location mLastLocation;
     private ArrayList<Marker> mMarkersPopusti = new ArrayList<>();
@@ -65,6 +66,9 @@ public class MapsActivity extends AppCompatActivity
     private Button btnDodajPopust;
     private boolean mServisAktivan = true;
     private ConstraintLayout mSlidingLayout;
+
+    private boolean mModPretrage = false;
+    public static int mFilterTipa = -1;
 
     private BroadcastReceiver bcReceiver = new BroadcastReceiver() {
         @Override
@@ -86,7 +90,7 @@ public class MapsActivity extends AppCompatActivity
                         Popust pop = p.get(i);
                         Marker tempMarker = mMap.addMarker(new MarkerOptions()
                                 .position( new LatLng(pop.loklat, pop.loklng))
-                                .title(pop.opispopusta)
+                                .title("Popust: " + pop.velicinapopusta + "%; " + TipoviPopusta.tipoviPopusta.get(pop.tippopusta))
                                 .snippet("(dodirni za još informacija)")
                         );
                         tempMarker.setTag(pop);

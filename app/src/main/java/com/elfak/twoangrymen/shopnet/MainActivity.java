@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity{
                                     Toast.makeText(MainActivity.this, "Login podaci nisu ispravni!", Toast.LENGTH_LONG).show();
                                 }
                             }else
-                                Log.e("GRESKA", "Server nije odgovorio.");
+                                Toast.makeText(MainActivity.this, "Server nije dostupan!", Toast.LENGTH_LONG).show();
                         }
                     }.execute("/login", "POST", zahtevJSON.toString());
                 } catch (JSONException e) {
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity{
                                 Log.e("TOKEN", "Token nije validan!");
                             }
                         } else
-                            Log.e("GRESKA", "Server nije odgovorio.");
+                            Toast.makeText(MainActivity.this, "Server nije dostupan!", Toast.LENGTH_LONG).show();
                     }
                 }.execute("/checktoken", "POST", tokenObjekat.toString());
             } catch (JSONException e) {
