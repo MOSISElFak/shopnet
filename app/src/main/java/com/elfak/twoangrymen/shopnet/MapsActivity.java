@@ -83,7 +83,7 @@ public class MapsActivity extends AppCompatActivity
 
     private boolean mModPretrage = false;
     public static int mFilterTipa = 0;
-    private int mRadius = 1000;
+    private int mRadius = 10000;
 
 
     private BroadcastReceiver bcReceiver = new BroadcastReceiver() {
