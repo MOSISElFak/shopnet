@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity{
         //iniciraj SPManager
         SharedPreferencesManager.init(MainActivity.this);
         Intent privIntent = getIntent();
+        //ucitaj tipove popusta
+        TipoviPopusta.ucitajTipove();
         //zatrazi location
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 123);
 

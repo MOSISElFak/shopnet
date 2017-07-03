@@ -21,6 +21,7 @@ public class TipoviPopusta {
                         //parsuj niz u objekat
                         TipoviPopusta.tipoviPopusta = new ArrayList<>();    //ovde kreiramo objekat u suprotnom je null
                         JSONArray niz = new JSONArray(r.getResponse());
+                        TipoviPopusta.tipoviPopusta.add("Svi popusti");
                         for (int i = 0; i < niz.length(); i++) {
                             //parsuj svaki objekat iz niza u JSONObject
                             JSONObject privremeni = niz.getJSONObject(i);
