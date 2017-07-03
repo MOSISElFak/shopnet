@@ -26,7 +26,8 @@ import java.net.URLEncoder;
  */
 
 public class WebService extends AsyncTask<String, Void, ServerResponse> {
-    private static String ServerURL = "http://192.168.1.32";
+    //private static String ServerURL = "http://192.168.1.32";
+    private static String ServerURL = "http://bencun.tk";
     private String serverResponse = null;
 
     @Override

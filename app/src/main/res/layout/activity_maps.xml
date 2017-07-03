@@ -71,6 +71,17 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
 
+            <Button
+                android:id="@+id/button_like"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/svidja_mi_se"
+                android:textSize="10sp"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <ImageView
                 android:id="@+id/image_profilna_sliding"
                 android:layout_width="64dp"
@@ -90,13 +101,13 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginTop="33dp"
                 android:text="TextView"
                 android:textColor="#fff"
-                android:textSize="18sp"
-                app:layout_constraintHorizontal_bias="1.0"
+                android:textSize="14sp"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toRightOf="@+id/image_profilna_sliding"
-                app:layout_constraintRight_toLeftOf="@+id/text_poeni"
+                app:layout_constraintRight_toLeftOf="@+id/button_like"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -251,12 +262,12 @@
         android:layout_width="320dp"
         android:layout_height="match_parent"
         android:background="#fff"
-        >
+        android:layout_gravity="start">
         <!-- User information -->
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout"
-            android:layout_width="382dp"
-            android:layout_height="240dp"
+            android:layout_width="320dp"
+            android:layout_height="200dp"
             android:background="#fff"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -267,14 +278,12 @@
                 android:id="@+id/image_view_profilna"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:layout_marginBottom="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@color/colorAccent"
-                app:layout_constraintBottom_toTopOf="@+id/spinner_tipovi_filter" />
+                app:srcCompat="@color/colorAccent" />
 
             <TextView
                 android:id="@+id/text_korime_display"
@@ -288,75 +297,79 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/app_name"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                app:layout_constraintBottom_toTopOf="@+id/spinner_tipovi_filter"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintLeft_toRightOf="@+id/image_view_profilna"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintBottom_toTopOf="@+id/spinner_tipovi_filter" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <Spinner
                 android:id="@+id/spinner_tipovi_filter"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                tools:layout_editor_absoluteY="115dp"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/textView9"
                 android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp" />
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintLeft_toRightOf="@+id/textView9"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_view_profilna" />
 
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
                 android:text="Filter popusta"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/spinner_tipovi_filter"
-                tools:layout_editor_absoluteY="119dp"
-                android:layout_marginStart="16dp" />
+                app:layout_constraintTop_toBottomOf="@+id/image_view_profilna" />
 
             <TextView
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Prečnik pretrage (m)"
+                android:layout_marginLeft="16dp"
                 android:layout_marginTop="24dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView9"
+                android:text="Prečnik pretrage (m)"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/edit_radius"
-                android:layout_marginLeft="16dp" />
+                app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
             <EditText
                 android:id="@+id/edit_radius"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="16dp"
                 android:ems="10"
                 android:inputType="numberSigned"
+                android:text="1000"
                 android:textSize="12sp"
                 app:layout_constraintLeft_toRightOf="@+id/textView10"
                 app:layout_constraintRight_toLeftOf="@+id/btn_set_radius"
-                android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView9"
-                android:layout_marginLeft="8dp" />
+                app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
             <Button
                 android:id="@+id/btn_set_radius"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Podesi"
-                app:layout_constraintRight_toRightOf="parent"
-                android:layout_marginTop="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/textView9"
-                app:layout_constraintLeft_toRightOf="@+id/edit_radius"
                 android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp" />
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Podesi"
+                app:layout_constraintLeft_toRightOf="@+id/edit_radius"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
         </android.support.constraint.ConstraintLayout>
         <!-- List -->
         <ListView
             android:id="@+id/list_view_drawer"
-            android:layout_width="0dp"
+            android:layout_width="320dp"
             android:layout_height="0dp"
             android:background="#fff"
             android:choiceMode="singleChoice"

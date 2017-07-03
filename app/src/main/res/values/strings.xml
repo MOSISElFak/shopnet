@@ -7,4 +7,5 @@
     <string name="title_activity_maps">Map</string>
     <string name="dodaj_popust">Dodaj popust</string>
     <string name="opis_servisa">Servis koji prati lokaciju korisnika i salje notifikacije.</string>
+    <string name="svidja_mi_se">Sviđa mi se</string>
 </resources>

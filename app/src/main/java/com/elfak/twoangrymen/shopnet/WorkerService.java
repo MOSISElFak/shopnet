@@ -25,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class WorkerService extends Service implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener  {
@@ -64,6 +65,11 @@ public class WorkerService extends Service implements GoogleApiClient.Connection
             if (aIntent.getAction() == MapsActivity.INTENT_OSVEZI_PRIJATELJE) {
                 //Toast.makeText(this, "Stigao intent da se osveze prijatelji.", Toast.LENGTH_SHORT).show();
                 osveziPrijatelje();
+            }
+            if(aIntent.getAction() == MapsActivity.INTENT_PRETRAZI){
+                if(aIntent.hasExtra("upit")){
+                    pretraziPopuste(aIntent.getStringExtra("upit"), aIntent.getIntExtra("radius", 1000));
+                }
             }
         }
         if(aIntent == null
@@ -172,7 +178,9 @@ public class WorkerService extends Service implements GoogleApiClient.Connection
                             for(int i=0; i < nizPopusta.length(); i++){
                                 JSONObject privremeni = nizPopusta.getJSONObject(i);
                                 Popust tempP = new Popust(privremeni);
-                                popusti.add(tempP);
+                                //proveri vreme
+                                if((System.currentTimeMillis() / 1000) > tempP.trajedo) continue;
+                                else popusti.add(tempP);
                             }//for
                             //send intent containing popusti
                             Intent testBroadcast = new Intent();
@@ -190,6 +198,53 @@ public class WorkerService extends Service implements GoogleApiClient.Connection
                     Log.e("GRESKA", "Server nije odgovorio.");
             }
         }.execute("/popusti", "POST", tokenObjekat.toString());
+    }
+
+    private void pretraziPopuste(String upit, final int radius){
+        JSONObject tokenObjekat = new JSONObject();
+        try {
+            SharedPreferencesManager.init(WorkerService.this);
+            tokenObjekat.put("token", SharedPreferencesManager.getPreferenceString(SharedPreferencesManager.STR_CURRENT_TOKEN));
+            tokenObjekat.put("upit", upit);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+        new WebService(){
+            protected void onPostExecute(ServerResponse r){
+                super.onPostExecute(r);
+                if(r != null) {
+                    if(r.getResponseCode() == 200) {
+                        try {
+                            ArrayList<Popust> popustiLok = new ArrayList<Popust>();
+                            JSONArray nizPopusta = new JSONArray(r.getResponse());
+                            for(int i=0; i < nizPopusta.length(); i++){
+                                JSONObject privremeni = nizPopusta.getJSONObject(i);
+                                Popust tempP = new Popust(privremeni);
+                                //proveri vreme
+                                if((System.currentTimeMillis() / 1000) > tempP.trajedo) continue;
+                                //proveri radius
+                                float[] distanca = new float[1];
+                                Location.distanceBetween(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude(), tempP.loklat, tempP.loklng, distanca);
+                                if(distanca[0] > radius) continue;
+                                popustiLok.add(tempP);
+                            }//for
+                            //send intent containing popusti
+                            Intent testBroadcast = new Intent();
+                            testBroadcast.setAction(MapsActivity.BROADCAST_TEST);
+                            testBroadcast.putExtra("PRETRAGAPOPUSTI", popustiLok);
+                            sendBroadcast(testBroadcast);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    else if(r.getResponseCode() == 400){
+                        Toast.makeText(WorkerService.this, "Server nije odgovorio!", Toast.LENGTH_LONG).show();
+                    }
+                }else
+                    Log.e("GRESKA", "Server nije odgovorio.");
+            }
+        }.execute("/popustipretraga", "POST", tokenObjekat.toString());
     }
 
     private void osveziPrijatelje(){
